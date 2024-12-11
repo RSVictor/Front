@@ -35,13 +35,13 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.log('Erro ao conectar ao MongoDB:', err));
 
 // Importação das rotas
-const booksRoutes = require('./Routes/books')(upload); // Passando Multer para as rotas
+const booksRoutes = require('./routes/books')(upload); // Passando Multer para as rotas
 app.use('/api/books', booksRoutes);
 
-const authRoutes = require('./Routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
-const userRoutes = require('./Routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 app.use('/admin/api/users', userRoutes); // Rotas CRUD de usuários
 
 
