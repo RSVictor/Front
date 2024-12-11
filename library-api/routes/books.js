@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const Book = require('../Models/Book')
+const Book = require('../Models/Book');
 const express = require('express');
 const router = express.Router();
 const Review = require('../Models/Review'); // Importa o modelo de Avaliações
