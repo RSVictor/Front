@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const authRoutes = require('./Routes/authRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 app.use(cors ({
     origin: 'http://localhost:8080', //Permite requisições apenas do seu froontend
