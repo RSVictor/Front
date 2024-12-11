@@ -2,7 +2,7 @@ import axios from 'axios'; // Importa Axios para requisições HTTP
 
 // Cria instância do Axios para gerenciamento de livros
 const booksApiClient = axios.create({
-    baseURL: `${import.meta.env.VITE_BACKEND_URL}/api`, // API para livros
+    baseURL: `${import.meta.env.VITE_BACKEND_URL}/api/books`, // API para livros
     headers: {
         'Content-Type': 'application/json',
     },
