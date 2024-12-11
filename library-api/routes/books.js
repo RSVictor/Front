@@ -1,10 +1,10 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const Book = require('../models/Book');
+const Book = require('../Models/Book')
 const express = require('express');
 const router = express.Router();
-const Review = require('../models/Review'); // Importa o modelo de Avaliações
+const Review = require('../Models/Review'); // Importa o modelo de Avaliações
 
 // Configuração do multer para upload de imagens
 const storage = multer.diskStorage({
