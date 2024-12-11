@@ -19,9 +19,10 @@ const upload = multer({ storage: storage }); // Corrigido para não usar .single
 
 const app = express();
 app.use(cors({
-    origin: 'https://front-xi-sand.vercel.app/',
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
+
 
 app.use(express.json());
 app.use('/uploads', express.static('uploads')); // Permitir acesso às imagens salvas
