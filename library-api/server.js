@@ -18,8 +18,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }); // Corrigido para não usar .single aqui
 
 const app = express();
+const allowedOrigins = ['http://localhost:5173', 'https://front-xi-sand.vercel.app'];
 app.use(cors({
-    origin: 'https://front-xi-sand.vercel.app/',
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Origin não permitida pelo CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
