@@ -19,7 +19,7 @@ const upload = multer({ storage: storage }); // Corrigido para não usar .single
 
 const app = express();
 app.use(cors({
-    origin: 'https://library-8hbh.onrender.com',
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
@@ -35,18 +35,17 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.log('Erro ao conectar ao MongoDB:', err));
 
 // Importação das rotas
-const booksRoutes = require('./routes/books')(upload); // Passando Multer para as rotas
+const booksRoutes = require('./Routes/books')(upload); // Passando Multer para as rotas
 app.use('/api/books', booksRoutes);
 
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./Routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./Routes/userRoutes');
 app.use('/admin/api/users', userRoutes); // Rotas CRUD de usuários
 
 
 const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
