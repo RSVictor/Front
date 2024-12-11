@@ -1,10 +1,8 @@
 import axios from 'axios'; // Importa Axios para requisições HTTP
 
-const apiUrl = 'https://front-iqbz.onrender.com';
-
 // Cria instância do Axios para gerenciamento de livros
 const booksApiClient = axios.create({
-    baseURL: `${apiUrl}/api/books`, // API para livros
+    baseURL: 'http://localhost:3000/api/books', // API para livros
     headers: {
         'Content-Type': 'application/json',
     },
@@ -12,7 +10,7 @@ const booksApiClient = axios.create({
 
 // Cria instância do Axios para login e outras rotas gerais
 const apiClient = axios.create({
-    baseURL: `${apiUrl}/api`, // API para login/usuários
+    baseURL: 'http://localhost:3000/api', // API para login/usuários
     headers: {
         'Content-Type': 'application/json',
     },
