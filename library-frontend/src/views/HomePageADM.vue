@@ -132,9 +132,10 @@ export default {
     },
 
     // Função para formatar o caminho da imagem (ajusta o caminho relativo)
-    formatImagePath(path) {
-      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Retorna a URL da imagem
-    },
+    const formatImagePath = (path) => {
+      const baseUrl = 'https://front-iqbz.onrender.com';
+        return `${baseUrl}/uploads/${path.replace(/\\/g, '/')}`;
+    };
 
     // Função para ir para a próxima página de livros
     goToNextPage() {

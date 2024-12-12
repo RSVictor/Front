@@ -121,9 +121,10 @@ export default {
 
 
     const formatImagePath = (path) => {
-      const baseUrl = 'https://front-iqbz.onrender.com';
-        return `${baseUrl}/uploads/${path.replace(/\\/g, '/')}`;
+      const baseUrl = 'https://front-iqbz.onrender.com'; // Substitua pelo seu backend
+      return `${baseUrl}/uploads/${path.replace(/\\/g, '/')}`;
     };
+
 
     // Computed properties para paginacao
     const paginatedBooks = computed(() => {

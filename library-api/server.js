@@ -20,7 +20,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage }); // Configurando Multer
 
-// Torna a pasta "uploads" pública
+
+// Servir o diretório de uploads como estático
 app.use('/uploads', express.static('uploads'));
 
 // Configuração do CORS
