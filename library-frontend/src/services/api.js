@@ -4,7 +4,7 @@ const apiUrl = 'https://front-iqbz.onrender.com';
 
 // Cria instância do Axios para gerenciamento de livros
 const booksApiClient = axios.create({
-    baseURL: `https://front-iqbz.onrender.com/api/books/api/books`, // API para livros
+    baseURL: `https://front-iqbz.onrender.com/api/books`, // API para livros
     headers: {
         'Content-Type': 'application/json',
     },
@@ -12,7 +12,7 @@ const booksApiClient = axios.create({
 
 // Cria instância do Axios para login e outras rotas gerais
 const apiClient = axios.create({
-    baseURL: `https://front-iqbz.onrender.com/api/books/api`, // API para login/usuários
+    baseURL: `https://front-iqbz.onrender.com/api`, // API para login/usuários
     headers: {
         'Content-Type': 'application/json',
     },
