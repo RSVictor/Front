@@ -19,7 +19,7 @@ const upload = multer({ storage: storage }); // Corrigido para não usar .single
 
 const app = express();
 app.use(cors({
-    origin: 'https://front-iqbz.onrender.com',
+    origin: 'https://front-xi-sand.vercel.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
