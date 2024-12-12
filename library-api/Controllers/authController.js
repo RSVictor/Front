@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ error: 'Senha incorreta' });
 
         // Cria web token
-        const token = jwt.sign({ id: user.id, permissions: user.permissions }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, permissions: user.permissions }, process.env.jwt_secret, { expiresIn: '1h' });
 
         // Retorna o token e as permissões
         res.status(200).json({
