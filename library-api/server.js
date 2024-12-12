@@ -5,6 +5,9 @@ const cors = require('cors');
 const multer = require('multer'); // Importando Multer
 const path = require('path');
 
+// Inicializa o app Express
+const app = express();
+
 // Configuração do Multer para salvar imagens
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -15,18 +18,21 @@ const storage = multer.diskStorage({
         cb(null, uniqueSuffix + path.extname(file.originalname)); // Gera um nome único para o arquivo
     },
 });
-const upload = multer({ storage: storage }); // Corrigido para não usar .single aqui
+const upload = multer({ storage: storage }); // Configurando Multer
 
-const app = express();
+// Torna a pasta "uploads" pública
+app.use('/uploads', express.static('uploads'));
+
+// Configuração do CORS
 app.use(cors({
     origin: ['https://front-xi-sand.vercel.app', 'http://localhost:3000'], // Permite múltiplas origens
     credentials: true, // Permite enviar cookies com as requisições
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-  }));
-  
+}));
+
+// Middleware para parsing de JSON
 app.use(express.json());
-app.use('/uploads', express.static('uploads')); // Permitir acesso às imagens salvas
 
 // Conexão ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -46,7 +52,7 @@ app.use('/api/auth', authRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use('/admin/api/users', userRoutes); // Rotas CRUD de usuários
 
-
+// Inicia o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
