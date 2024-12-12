@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const user = require('../models/user');  // Modelo de usuário
+const User = require('../models/user');  // Modelo de usuário
 const bcrypt = require('bcryptjs');  // Biblioteca para criptografia de senha
 
 // Rota para obter todos os usuários
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find();  // Busca todos os usuários
-        res.json(users);  // Retorna os usuários como JSON
+        console.log('Buscando usuários...');
+        const users = await User.find();
+        console.log('Usuários encontrados:', users);
+        res.json(users);
     } catch (error) {
-        console.error('Erro ao buscar usuários:', error);
-        res.status(500).json({ message: 'Erro ao buscar usuários' });
+        console.error('Erro ao buscar usuários:', error.message);
+        res.status(500).json({ message: 'Erro ao buscar usuários', error: error.message });
     }
 });
 
@@ -99,7 +101,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Rota para bloquear (inativar) um usuário
-router.put('/:id', async (req, res) => {
+router.put('/:id/block', async (req, res) => {
     const { id } = req.params;
     try {
         const user = await User.findByIdAndUpdate(id, { status: 'Inativo' }, { new: true });

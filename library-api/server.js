@@ -35,6 +35,11 @@ app.use(cors({
 // Middleware para parsing de JSON
 app.use(express.json());
 
+app.use((err, req, res, next) => {
+    console.error('Erro no servidor:', err.stack);
+    res.status(500).json({ message: 'Erro interno do servidor', error: err.message });
+});
+
 // Conexão ao MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
