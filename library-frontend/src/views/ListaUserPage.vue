@@ -157,7 +157,7 @@ export default {
     // Função para buscar usuários da API
     async fetchUsers() {
       try {
-        const response = await axios.get('https://front-iqbz.onrender.com/admin/api/users'); // Requisição GET para buscar usuários
+        const response = await axios.get('https://front-iqbz.onrender.com/api/books'); // Requisição GET para buscar usuários
         this.users = response.data;  // Armazena a resposta na variável 'users'
       } catch (error) {
         console.error('Erro ao buscar usuários:', error); // Exibe erro no console se houver falha na requisição
