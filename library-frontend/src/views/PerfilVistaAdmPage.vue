@@ -99,7 +99,7 @@ export default {
     async fetchUserData() {
       try {
         const userId = this.$route.params.id;  // Obtém o ID do usuário a partir da URL
-        const response = await axios.get(`http://localhost:3000/admin/api/users/${userId}`);  // Faz uma requisição para buscar os dados do usuário
+        const response = await axios.get(`https://front-iqbz.onrender.com/admin/api/users/${userId}`);  // Faz uma requisição para buscar os dados do usuário
 
         // Preenche o objeto 'user' com os dados recebidos da API
         this.user = response.data;

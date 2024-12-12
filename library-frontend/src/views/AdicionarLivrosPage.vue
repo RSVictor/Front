@@ -193,7 +193,7 @@ export default {
 
       try {
         // Envia os dados do formulário para a API usando Axios
-        const response = await axios.post('http://localhost:3000/api/books', formData, {
+        const response = await axios.post('https://front-iqbz.onrender.com/api/books', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

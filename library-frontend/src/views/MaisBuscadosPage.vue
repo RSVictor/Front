@@ -59,7 +59,7 @@ export default {
     // Função assíncrona para buscar os livros mais buscados da API
     const fetchMostSearchedBooks = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/books/most-searched');
+        const response = await axios.get('https://front-iqbz.onrender.com/api/books/most-searched');
         mostSearchedBooks.value = response.data; // Atualiza a lista de livros mais buscados
       } catch (error) {
         console.error('Erro ao buscar os livros mais buscados', error); // Exibe erro no console se falhar
@@ -69,7 +69,7 @@ export default {
     // Função para registrar a visualização de um livro
     const incrementSearchCount = async (bookId) => {
       try {
-        await axios.post(`http://localhost:3000/api/books/viewed/${bookId}`);
+        await axios.post(`https://front-iqbz.onrender.com/api/books/viewed/${bookId}`);
       } catch (error) {
         console.error('Erro ao registrar busca', error); // Exibe erro no console se falhar
       }
@@ -99,7 +99,7 @@ export default {
     // Função para formatar o caminho da imagem, se necessário
     const formatImagePath = (path) => {
       // Se o caminho da imagem for relativo, adiciona o prefixo da URL base
-      return `http://localhost:3000/${path}`; // Ajuste o caminho conforme a estrutura da sua API
+      return `https://front-iqbz.onrender.com/${path}`; // Ajuste o caminho conforme a estrutura da sua API
     };
 
     // Retorna as variáveis e funções para que possam ser usadas no template

@@ -76,7 +76,7 @@ export default {
 
     // Função para formatar o caminho da imagem
     const formatImagePath = (path) => {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`;
     };
 
     // Ao deslogar, limpar favoritos

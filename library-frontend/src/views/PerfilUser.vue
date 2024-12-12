@@ -99,7 +99,7 @@ export default {
     async fetchUserData() {
       try {
         const userId = localStorage.getItem("userId");  // Recupera o userId do localStorage        
-        const response = await axios.put(`http://localhost:3000/admin/api/users/${userId}`);
+        const response = await axios.put(`https://front-iqbz.onrender.com/admin/api/users/${userId}`);
 
         // Atualiza as variáveis com os dados recebidos
         this.username = response.username;  // Atualiza o nome de usuário

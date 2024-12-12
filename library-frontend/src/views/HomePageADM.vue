@@ -133,7 +133,7 @@ export default {
 
     // Função para formatar o caminho da imagem (ajusta o caminho relativo)
     formatImagePath(path) {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`; // Retorna a URL da imagem
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Retorna a URL da imagem
     },
 
     // Função para ir para a próxima página de livros

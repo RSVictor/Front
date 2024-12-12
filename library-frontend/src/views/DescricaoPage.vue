@@ -162,7 +162,7 @@ export default {
 
     // Função para formatar o caminho da imagem
     const formatImagePath = (path) => {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
     };
 
     // Função para enviar avaliação

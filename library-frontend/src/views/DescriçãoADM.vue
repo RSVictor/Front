@@ -129,7 +129,7 @@ export default {
     
     // Função para formatar o caminho da imagem do livro
     formatImagePath(path) {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`; // Corrige o caminho para uma URL válida
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Corrige o caminho para uma URL válida
     }
   }
 };

@@ -84,8 +84,7 @@ export default {
     const booksPerPage = 12;
 
     const userId = localStorage.getItem("userId");
-    console.log('AQUIIIIIIIIIIIIIIIIIII:', userId)
-
+    
     // Ao logar, carregar favoritos do usuário
     if (authStore.isLoggedIn && authStore.user) {
       favoriteStore.loadFavorites(authStore.user.id);
@@ -122,7 +121,7 @@ export default {
 
 
     const formatImagePath = (path) => {
-      return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`;
     };
 
     // Computed properties para paginacao

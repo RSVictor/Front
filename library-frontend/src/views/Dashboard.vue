@@ -100,13 +100,13 @@ export default {
     // Função para buscar os dados da API (quantidade de livros, usuários e livros emprestados)
     const getData = async () => {
       try {
-        const responseLivros = await axios.get('http://localhost:3000/api/books');
+        const responseLivros = await axios.get('https://front-iqbz.onrender.com/api/books');
         totalLivros.value = responseLivros.data.length;
 
-        const responseUsuarios = await axios.get('http://localhost:3000/admin/api/users');
+        const responseUsuarios = await axios.get('https://front-iqbz.onrender.com/admin/api/users');
         totalUsuarios.value = responseUsuarios.data.length;
 
-        const responseLivrosEmprestados = await axios.get('https://suaapi.com/api/livros/emprestados');
+        const responseLivrosEmprestados = await axios.get('https://front-iqbz.onrender.com/api/livros/emprestados');
         totalLivrosEmprestados.value = responseLivrosEmprestados.data.length;
       } catch (error) {
         console.error('Erro ao buscar dados da API:', error);

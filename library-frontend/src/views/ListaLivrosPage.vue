@@ -163,7 +163,7 @@ export default {
       const confirmed = window.confirm('Você tem certeza que deseja excluir este livro?');
       if (confirmed) {
         try {
-          await axios.delete(`http://localhost:3000/api/books/${id}`);
+          await axios.delete(`https://front-iqbz.onrender.com/api/books/${id}`);
           this.books = this.books.filter(book => book._id !== id); // Remove o livro da lista local
           alert('Livro excluído com sucesso!'); // Exibe mensagem de sucesso
         } catch (error) {

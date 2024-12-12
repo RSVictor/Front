@@ -132,7 +132,7 @@ export default {
 
       try {
         // Faz uma requisição GET para buscar os dados do livro no servidor
-        const response = await axios.get(`http://localhost:3000/api/books/${bookId}`);
+        const response = await axios.get(`https://front-iqbz.onrender.com/api/books/${bookId}`);
         console.log('Dados do livro:', response.data); // Exibe os dados do livro para depuração
 
         if (response.data) {
@@ -162,7 +162,7 @@ export default {
           return path; // Retorna o caminho como está
         } else {
           // Caso contrário, cria uma URL absoluta para a imagem
-          return `http://localhost:3000/${path.replace(/\\/g, '/')}`;
+          return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`;
         }
       }
       return ''; // Retorna uma string vazia caso não haja imagem
@@ -240,7 +240,7 @@ export default {
 
       try {
         // Envia os dados para o servidor (PUT) para atualizar o livro
-        const response = await axios.put(`http://localhost:3000/api/books/${this.book._id}`, formData, {
+        const response = await axios.put(`https://front-iqbz.onrender.com/api/books/${this.book._id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
 
