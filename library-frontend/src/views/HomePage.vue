@@ -121,7 +121,8 @@ export default {
 
 
     const formatImagePath = (path) => {
-      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`;
+      const baseUrl = 'https://front-iqbz.onrender.com';
+        return `${baseUrl}/uploads/${path.replace(/\\/g, '/')}`;
     };
 
     // Computed properties para paginacao
