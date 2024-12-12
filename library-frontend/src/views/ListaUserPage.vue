@@ -160,7 +160,8 @@ export default {
         const response = await axios.get('https://front-iqbz.onrender.com/admin/api/users'); // Requisição GET para buscar usuários
         this.users = response.data;  // Armazena a resposta na variável 'users'
       } catch (error) {
-        console.error('Erro ao buscar usuários:', error); // Exibe erro no console se houver falha na requisição
+        console.error('Erro ao buscar usuários:', error.response ? error.response.data : error.message);
+
       }
     },
     
