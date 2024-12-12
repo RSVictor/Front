@@ -121,7 +121,7 @@ export default {
 
 
     const formatImagePath = (path) => {
-      const baseUrl = 'https://front-iqbz.onrender.com'; // Substitua pelo seu backend
+      const baseUrl = 'https://front-iqbz.onrender.com'; 
       return `${baseUrl}/uploads/${path.replace(/\\/g, '/')}`;
     };
 
