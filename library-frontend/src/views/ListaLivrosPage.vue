@@ -151,7 +151,7 @@ export default {
     // Função para buscar todos os livros do servidor
     async fetchBooks() {
       try {
-        const response = await axios.get('http://localhost:3000/api/books');
+        const response = await axios.get('https://front-iqbz.onrender.com/api/books');
         this.books = response.data;  // Armazena os livros na variável 'books'
       } catch (error) {
         console.error('Erro ao buscar livros:', error);  // Em caso de erro na requisição
