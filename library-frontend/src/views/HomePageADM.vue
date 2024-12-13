@@ -66,102 +66,69 @@
 
 
 <script>
-import { useAuthStore } from '../stores/authStore'; // Acessa a store de autenticação
-import { useFavoriteStore } from '../stores/favoriteStore'; // Acessa a store de favoritos
-import { useRouter } from 'vue-router'; // Acessa o Vue Router para navegação
-import { booksService } from '@/services/api'; // Acessa o serviço de livros
+import { useAuthStore } from '../stores/authStore'; 
+import { booksService } from '@/services/api'; 
 
 export default {
   data() {
     return {
-      books: [], // Lista de livros que será exibida
-      searchQuery: this.$route.query.search || '', // Armazena o termo de pesquisa vindo da URL
-      searchApplied: '', // Armazena o filtro aplicado após a busca
-      currentPage: 1, // Página atual (inicialmente 1)
-      booksPerPage: 12, // Número de livros a serem exibidos por página
+      books: [],
+      searchQuery: this.$route.query.search || '',
+      searchApplied: '',
+      currentPage: 1,
+      booksPerPage: 12,
     };
   },
   computed: {
-    // Calcula os livros que serão exibidos para a página atual
     paginatedBooks() {
-      // Filtra os livros pelo título (conforme o termo de busca)
       const filteredBooks = this.books.filter((book) => 
         book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
-
-      // Determina o índice de início e fim dos livros a serem exibidos
       const start = (this.currentPage - 1) * this.booksPerPage;
       const end = start + this.booksPerPage;
-
-      // Retorna os livros filtrados e paginados
       return filteredBooks.slice(start, end);
     },
-    
-    // Calcula o número total de páginas com base nos livros filtrados
     totalPages() {
       const filteredBooks = this.books.filter((book) => 
         book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
-      return Math.ceil(filteredBooks.length / this.booksPerPage); // Total de páginas
+      return Math.ceil(filteredBooks.length / this.booksPerPage);
     },
   },
-  
-  setup() {
-    // Configura as stores e o router
-    const authStore = useAuthStore();  // Store de autenticação
-    const favoriteStore = useFavoriteStore();  // Store de favoritos
-    const router = useRouter();  // Router para navegação
-
-       // Função para formatar o caminho da imagem
-       const formatImagePath = (path) => {
-      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
-    };
-  },
-  
   methods: {
-    // Função para buscar livros da API com base no filtro de pesquisa
+    formatImagePath(path) {
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`;
+    },
     fetchBooks() {
-      // Parâmetros de consulta com base no termo de pesquisa
       const queryParams = this.searchQuery ? { search: this.searchQuery } : {};
 
       booksService.getBooks(queryParams).then(response => {
-        this.books = response.data; // Armazena os livros retornados pela API
-        console.log(this.books);      // Log dos dados recebidos (útil para debug)
+        this.books = response.data;
+        console.log(this.books);
       }).catch(error => {
-        console.error("Erro ao buscar livros:", error);  // Tratamento de erro
+        console.error("Erro ao buscar livros:", error);
       });
     },
-
-   
-
-    // Aplica o filtro de pesquisa
     applyFilter() {
-      this.searchApplied = this.searchQuery;  // Atualiza o valor aplicado
+      this.searchApplied = this.searchQuery;
     },
-    
-
-    // Função para ir para a próxima página de livros
     goToNextPage() {
       if (this.currentPage < this.totalPages) {
-        this.currentPage++; // Incrementa a página atual
+        this.currentPage++;
       }
     },
-
-    // Função para ir para a página anterior
     goToPreviousPage() {
       if (this.currentPage > 1) {
-        this.currentPage--; // Decrementa a página atual
+        this.currentPage--;
       }
     }
   },
-
-  // Função chamada quando o componente é montado
   mounted() {
     const authStore = useAuthStore();
-    this.username = authStore.username; // Obtém o nome do usuário da store
-    this.fetchBooks(); // Busca os livros na API
+    this.username = authStore.username; 
+    this.fetchBooks(); 
     if (this.searchQuery) {
-      this.applyFilter(); // Aplica o filtro se houver um termo de pesquisa
+      this.applyFilter();
     }
   }
 };
