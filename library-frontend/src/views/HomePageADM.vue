@@ -40,8 +40,7 @@
             <!-- Redireciona para a página de descrição do livro -->
             <router-link :to="{ name: 'descricaoADM', params: { id: book._id } }">
                <!-- Imagem do livro (se disponível) -->
-            <img v-if="book && book.image" :src="formatImagePath(book.image)" class="card-img-top" alt="Imagem do Livro" style="width: 100%; height: 100%;" />
-            <p v-else>Imagem não disponível</p>
+               <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
             </router-link>
 
             <div class="card-body">
