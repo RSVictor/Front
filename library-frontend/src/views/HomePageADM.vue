@@ -39,7 +39,9 @@
           <div class="card">
             <!-- Redireciona para a página de descrição do livro -->
             <router-link :to="{ name: 'descricaoADM', params: { id: book._id } }">
-              <img :src="formatImagePath(book.image)" class="card-img-top mt-2" alt="Imagem do Livro">
+               <!-- Imagem do livro (se disponível) -->
+            <img v-if="book && book.image" :src="formatImagePath(book.image)" class="card-img-top" alt="Imagem do Livro" style="width: 100%; height: 100%;" />
+            <p v-else>Imagem não disponível</p>
             </router-link>
 
             <div class="card-body">
@@ -110,6 +112,11 @@ export default {
     const authStore = useAuthStore();  // Store de autenticação
     const favoriteStore = useFavoriteStore();  // Store de favoritos
     const router = useRouter();  // Router para navegação
+
+       // Função para formatar o caminho da imagem
+       const formatImagePath = (path) => {
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
+    };
   },
   
   methods: {
@@ -126,15 +133,13 @@ export default {
       });
     },
 
+   
+
     // Aplica o filtro de pesquisa
     applyFilter() {
       this.searchApplied = this.searchQuery;  // Atualiza o valor aplicado
     },
-
-    /  const formatImagePath = (path) => {
-      const baseUrl = 'https://front-iqbz.onrender.com'; 
-      return `${baseUrl}/uploads/${path.replace(/\\/g, '/')}`;
-    };
+    
 
     // Função para ir para a próxima página de livros
     goToNextPage() {
