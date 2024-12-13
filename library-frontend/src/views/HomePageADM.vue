@@ -66,118 +66,103 @@
 
 
 <script>
-import { useAuthStore } from '../stores/authStore';
-import { useFavoriteStore } from '../stores/favoriteStore';
-import { useRouter } from 'vue-router';
-import { booksService } from '@/services/api';
-import { computed, ref, onMounted } from 'vue';
+import { useAuthStore } from '../stores/authStore'; // Acessa a store de autenticação
+import { useFavoriteStore } from '../stores/favoriteStore'; // Acessa a store de favoritos
+import { useRouter } from 'vue-router'; // Acessa o Vue Router para navegação
+import { booksService } from '@/services/api'; // Acessa o serviço de livros
 
 export default {
-  setup() {
-    const authStore = useAuthStore();
-    const favoriteStore = useFavoriteStore();
-    const router = useRouter();
-
-    const books = ref([]);
-    const searchQuery = ref('');
-    const currentPage = ref(1);
-    const booksPerPage = 12;
-
-    const userId = localStorage.getItem("userId");
-    
-    // Ao logar, carregar favoritos do usuário
-    if (authStore.isLoggedIn && authStore.user) {
-      favoriteStore.loadFavorites(authStore.user.id);
-    }
-
-
-    const handleEmprestar = () => {
-      if (!authStore.isLoggedIn) {
-        alert('Você precisa fazer login para emprestar um livro.');
-        router.push('/login');
-      } else {
-        router.push('/emprestimo');
-      }
-    };
-    
- // Função para alternar o favorito (adicionar ou remover)
- const toggleFavorite = (book) => {
-      if (!authStore.isLoggedIn) {
-        alert("Você precisa estar logado para favoritar.");
-        router.push('/login');
-        return;  // Impede qualquer outra ação se não estiver logado
-      }
-      if (favoriteStore.isFavorite(book)) {
-        favoriteStore.removeFromFavorites(book);
-      } else {
-        favoriteStore.addToFavorites(book);
-      }
-    };
-
-    // Verifica se o livro está nos favoritos
-    const isFavorite = (book) => {
-      return favoriteStore.isFavorite(book);
-    };
-
-    // Função para formatar o caminho da imagem
-    const formatImagePath = (path) => {
-      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
-    };
-
-    // Computed properties para paginacao
-    const paginatedBooks = computed(() => {
-      const filteredBooks = books.value.filter((book) =>
-        book.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-      const start = (currentPage.value - 1) * booksPerPage;
-      const end = start + booksPerPage;
-      return filteredBooks.slice(start, end);
-    });
-
-    const totalPages = computed(() => {
-      const filteredBooks = books.value.filter((book) =>
-        book.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-      );
-      return Math.ceil(filteredBooks.length / booksPerPage);
-    });
-
-    const fetchBooks = () => {
-      const queryParams = searchQuery.value ? { search: searchQuery.value } : {};
-      booksService.getBooks(queryParams).then(response => {
-        books.value = response.data;
-      }).catch(error => {
-        console.error("Erro ao buscar livros:", error);
-      });
-    };
-
-    const goToNextPage = () => {
-      if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-      }
-    };
-
-    const goToPreviousPage = () => {
-      if (currentPage.value > 1) {
-        currentPage.value--;
-      }
-    };
-
-    onMounted(() => {
-      fetchBooks();
-    });
-
+  data() {
     return {
-      authStore,
-      handleEmprestar,
-      toggleFavorite,
-      isFavorite,
-      formatImagePath,
-      paginatedBooks,
-      totalPages,
-      currentPage,
-      goToNextPage,
-      goToPreviousPage
+      books: [], // Lista de livros que será exibida
+      searchQuery: this.$route.query.search || '', // Armazena o termo de pesquisa vindo da URL
+      searchApplied: '', // Armazena o filtro aplicado após a busca
+      currentPage: 1, // Página atual (inicialmente 1)
+      booksPerPage: 12, // Número de livros a serem exibidos por página
     };
   },
+  computed: {
+    // Calcula os livros que serão exibidos para a página atual
+    paginatedBooks() {
+      // Filtra os livros pelo título (conforme o termo de busca)
+      const filteredBooks = this.books.filter((book) => 
+        book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+
+      // Determina o índice de início e fim dos livros a serem exibidos
+      const start = (this.currentPage - 1) * this.booksPerPage;
+      const end = start + this.booksPerPage;
+
+      // Retorna os livros filtrados e paginados
+      return filteredBooks.slice(start, end);
+    },
+    
+    // Calcula o número total de páginas com base nos livros filtrados
+    totalPages() {
+      const filteredBooks = this.books.filter((book) => 
+        book.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+      return Math.ceil(filteredBooks.length / this.booksPerPage); // Total de páginas
+    },
+  },
+  
+  setup() {
+    // Configura as stores e o router
+    const authStore = useAuthStore();  // Store de autenticação
+    const favoriteStore = useFavoriteStore();  // Store de favoritos
+    const router = useRouter();  // Router para navegação
+
+       // Função para formatar o caminho da imagem
+       const formatImagePath = (path) => {
+      return `https://front-iqbz.onrender.com/${path.replace(/\\/g, '/')}`; // Formatação da URL da imagem
+    };
+  },
+  
+  methods: {
+    // Função para buscar livros da API com base no filtro de pesquisa
+    fetchBooks() {
+      // Parâmetros de consulta com base no termo de pesquisa
+      const queryParams = this.searchQuery ? { search: this.searchQuery } : {};
+
+      booksService.getBooks(queryParams).then(response => {
+        this.books = response.data; // Armazena os livros retornados pela API
+        console.log(this.books);      // Log dos dados recebidos (útil para debug)
+      }).catch(error => {
+        console.error("Erro ao buscar livros:", error);  // Tratamento de erro
+      });
+    },
+
+   
+
+    // Aplica o filtro de pesquisa
+    applyFilter() {
+      this.searchApplied = this.searchQuery;  // Atualiza o valor aplicado
+    },
+    
+
+    // Função para ir para a próxima página de livros
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++; // Incrementa a página atual
+      }
+    },
+
+    // Função para ir para a página anterior
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--; // Decrementa a página atual
+      }
+    }
+  },
+
+  // Função chamada quando o componente é montado
+  mounted() {
+    const authStore = useAuthStore();
+    this.username = authStore.username; // Obtém o nome do usuário da store
+    this.fetchBooks(); // Busca os livros na API
+    if (this.searchQuery) {
+      this.applyFilter(); // Aplica o filtro se houver um termo de pesquisa
+    }
+  }
 };
 </script>
