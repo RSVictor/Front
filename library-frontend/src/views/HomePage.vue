@@ -26,7 +26,7 @@
         </div>
       </div>
       <span class="livro">Livros</span>
-      <div class="row flex-wrap">
+      <div class="row flex-wrap" id="cards">
         <div class="card-wrapper col-12 col-sm-6 col-md-4 col-lg-3 mb-3" v-for="book in paginatedBooks" :key="book._id">
           <div class="card">
             <router-link :to="{ name: 'descricao', params: { id: book._id } }">
