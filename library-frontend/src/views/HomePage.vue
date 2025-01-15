@@ -4,7 +4,7 @@
       <p>Bem-vindo, {{ authStore.username }}</p> <!-- Acesso direto ao username da store -->
     </div>
     <div class="row mt-3">
-      <span>Editoras</span>
+      <span class="editora">Editoras</span>
       <div class="mt-3 mb-5 row circulos">
         <div class="circle" style="background-color: #93BFA7;">
           <span>Galáxia dos Livros</span>
