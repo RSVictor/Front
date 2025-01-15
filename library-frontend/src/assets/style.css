@@ -1043,11 +1043,11 @@ font-size: 14px;
 }
 
 @media only screen and (max-width: 768px) {
-    .circle .editora{
+    .circle {
       display: none;
     }
 
-    .container .row{
+    .container {
         display: flex;
         align-items: center;
       }
