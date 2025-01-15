@@ -1054,6 +1054,7 @@ font-size: 14px;
     }
 
     .livros{
+        z-index: 1;
         margin-top: 10px;
     }
 
