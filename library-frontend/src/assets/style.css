@@ -1045,6 +1045,7 @@ font-size: 14px;
 @media only screen and (max-width: 768px) {
     .circle {
       display: none;
+      margin-bottom: 0;
     }
 
     .container {
@@ -1052,4 +1053,29 @@ font-size: 14px;
         align-items: center;
       }
 }
+@media only screen and (max-width: 1024px) {
+    html {
+      font-size: 60%;
+    }
+  
+    h1 {
+      font-size: 6rem;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    html {
+      font-size: 58%;
+    }
+  
+    .max-width {
+      padding: 0 2rem;
+    }
+  }
+  
+  @media only screen and (max-width: 425px) {
+    h1 {
+      font-size: 4.2rem;
+    }
+  }
 
