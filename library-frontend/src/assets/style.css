@@ -1042,4 +1042,14 @@ font-size: 14px;
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .circle{
+      display: none;
+    }
+
+    .container .row{
+        display: flex;
+        align-items: center;
+      }
+}
 
