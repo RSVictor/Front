@@ -1049,6 +1049,10 @@ font-size: 14px;
       margin-top: 20px;
     }
 
+    .editora {
+        display: none;
+    }
+
     .container {
         display: flex;
         align-items: center;
